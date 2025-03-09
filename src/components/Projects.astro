@@ -1,0 +1,110 @@
+---
+import Work1 from '../assets/work-1.png'
+import Work2 from '../assets/work-2.png'
+import Work3 from '../assets/work-3.png'
+import Work4 from '../assets/work-4.png'
+---
+<section>
+  <h2 class="heading-1">
+    <span class="green">Regardez</span> mes <span class="violet">cartes</span> et 
+    <span class="violet">projets</span> pour découvrir comment je transforme mes 
+    <span class="pink">idées</span>.
+  </h2>
+  <ul class="projects">
+    <!-- Projet 1 -->
+    <li class="card">
+      <figure class="card-picture">
+        <img src={Work1.src} alt="Carte Bivariée">
+      </figure>
+      <h3 class="heading-3">
+        <a href="#" class="lightbox-trigger" data-img={Work1.src}>
+          Carte Bivariée
+        </a>
+      </h3>
+      <ul class="card-skills">
+        <li class="card-tag">QGIS</li>
+        <li class="card-tag">Illustrator</li>
+        <li class="card-tag">Excel</li>
+      </ul>
+    </li>
+    <!-- Projet 2 -->
+    <li class="card">
+      <figure class="card-picture">
+        <img src={Work2.src} alt="Carte sur les données GTFS">
+      </figure>
+      <h3 class="heading-3">
+        <a href="#" class="lightbox-trigger" data-img={Work2.src}>
+          Carte sur les données GTFS
+        </a>
+      </h3>
+      <ul class="card-skills">
+        <li class="card-tag">QGIS</li>
+        <li class="card-tag">Illustrator</li>
+        <li class="card-tag">Données GTFS</li>
+      </ul>
+    </li>
+    <!-- Projet 3 -->
+    <li class="card">
+      <figure class="card-picture">
+        <img src={Work3.src} alt="Dataviz sur LebronJames">
+      </figure>
+      <h3 class="heading-3">
+        <a href="#" class="lightbox-trigger" data-img={Work3.src}>
+          Dataviz sur LebronJames
+        </a>
+      </h3>
+      <ul class="card-skills">
+        <li class="card-tag">Illustrator</li>
+        <li class="card-tag">Flourish</li>
+      </ul>
+    </li>
+    <!-- Projet 4 (lien externe) -->
+    <li class="card">
+      <figure class="card-picture">
+        <img src={Work4.src} alt="ScrollyTelling">
+      </figure>
+      <h3 class="heading-3">
+        <a href="https://sigatnguyen.github.io/OFCarto_/" target="_blank" rel="noopener noreferrer">
+          ScrollyTelling
+        </a>
+      </h3>
+      <ul class="card-skills">
+        <li class="card-tag">CodePen</li>
+        <li class="card-tag">HTML</li>
+        <li class="card-tag">CSS</li>
+        <li class="card-tag">JavaScript</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<!-- Lightbox cachée par défaut -->
+<div id="lightbox" class="lightbox">
+  <img src="" alt="Agrandissement" class="lightbox-img">
+</div>
+
+<!-- Script pour la lightbox -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.querySelector('.lightbox-img');
+  const triggers = document.querySelectorAll('.lightbox-trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault(); // Empêche le comportement par défaut du lien
+      const imgSrc = trigger.getAttribute('data-img');
+      lightboxImg.src = imgSrc;
+      lightbox.classList.add('open'); // Affiche la lightbox
+    });
+  });
+
+  // Fermer la lightbox en cliquant sur l'overlay ou sur l'image agrandie
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightboxImg) {
+      lightbox.classList.remove('open');
+      lightboxImg.src = "";
+    }
+  });
+});
+</script>
