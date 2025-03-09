@@ -1,5 +1,2 @@
-export default defineConfig({
-  // ...
-  base: '/myportfolio/',
-  // ...
-});
+import { defineConfig } from 'astro/config';
+
