@@ -1,8 +1,10 @@
 ---
-import Work1 from '../assets/work-1.png'
-import Work2 from '../assets/work-2.png'
-import Work3 from '../assets/work-3.png'
-import Work4 from '../assets/work-4.png'
+// Importez le composant Image depuis l’intégration d’Astro
+import { Image } from '@astrojs/image/components';
+import Work1 from '../assets/work-1.png';
+import Work2 from '../assets/work-2.png';
+import Work3 from '../assets/work-3.png';
+import Work4 from '../assets/work-4.png';
 ---
 <section>
   <h2 class="heading-1">
@@ -14,7 +16,7 @@ import Work4 from '../assets/work-4.png'
     <!-- Projet 1 -->
     <li class="card">
       <figure class="card-picture">
-        <img src={Work1.src} alt="Carte Bivariée">
+        <Image src={Work1} alt="Carte Bivariée" />
       </figure>
       <h3 class="heading-3">
         <a href="#" class="lightbox-trigger" data-img={Work1.src}>
@@ -30,7 +32,7 @@ import Work4 from '../assets/work-4.png'
     <!-- Projet 2 -->
     <li class="card">
       <figure class="card-picture">
-        <img src={Work2.src} alt="Carte sur les données GTFS">
+        <Image src={Work2} alt="Carte sur les données GTFS" />
       </figure>
       <h3 class="heading-3">
         <a href="#" class="lightbox-trigger" data-img={Work2.src}>
@@ -46,7 +48,7 @@ import Work4 from '../assets/work-4.png'
     <!-- Projet 3 -->
     <li class="card">
       <figure class="card-picture">
-        <img src={Work3.src} alt="Dataviz sur LebronJames">
+        <Image src={Work3} alt="Dataviz sur LebronJames" />
       </figure>
       <h3 class="heading-3">
         <a href="#" class="lightbox-trigger" data-img={Work3.src}>
@@ -61,7 +63,7 @@ import Work4 from '../assets/work-4.png'
     <!-- Projet 4 (lien externe) -->
     <li class="card">
       <figure class="card-picture">
-        <img src={Work4.src} alt="ScrollyTelling">
+        <Image src={Work4} alt="ScrollyTelling" />
       </figure>
       <h3 class="heading-3">
         <a href="https://sigatnguyen.github.io/OFCarto_/" target="_blank" rel="noopener noreferrer">
@@ -92,14 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   triggers.forEach(trigger => {
     trigger.addEventListener('click', (e) => {
-      e.preventDefault(); // Empêche le comportement par défaut du lien
+      e.preventDefault();
+      // Pour la lightbox, assurez-vous que la source utilisée est celle attendue,
+      // car le composant Image d’Astro peut générer des URL optimisées.
       const imgSrc = trigger.getAttribute('data-img');
       lightboxImg.src = imgSrc;
-      lightbox.classList.add('open'); // Affiche la lightbox
+      lightbox.classList.add('open');
     });
   });
 
-  // Fermer la lightbox en cliquant sur l'overlay ou sur l'image agrandie
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox || e.target === lightboxImg) {
       lightbox.classList.remove('open');
